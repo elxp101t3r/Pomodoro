@@ -17,10 +17,16 @@ def start_timer():
     work_sec = WORK_MIN * 60
     
     if reps % 8 == 0:
+        timer_label.config(text='Work Time', bootstyle='success')
+        canvas.itemconfig(timer, fill='green')
         count_d(long_break_sec)
     elif reps % 2 == 0:
+        timer_label.config(text='Time for a Break', bootstyle='warning')
+        canvas.itemconfig(timer, fill='orange')
         count_d(short_break_sec)
     else:
+        timer_label.config(text='Work Time', bootstyle='success')
+        canvas.itemconfig(timer, fill='green')
         count_d(work_sec)
 
 def count_d(c):
