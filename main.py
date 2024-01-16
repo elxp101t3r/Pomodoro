@@ -16,6 +16,14 @@ def start_timer():
 def count_d(c):
     count_min = math.floor(c / 60)
     count_sec = c % 60
+    
+    #Dynamic Typing Here
+    if count_sec < 10:
+        count_sec = f"0{count_sec}"
+    if count_sec == 0:
+        count_sec = '00'
+    
+      
     canvas.itemconfig(timer, text=f'{count_min}:{count_sec}')
     
     if c > 0:
