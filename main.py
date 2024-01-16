@@ -17,11 +17,11 @@ def start_timer():
     work_sec = WORK_MIN * 60
     
     if reps % 8 == 0:
-        timer_label.config(text='Work Time', bootstyle='success')
-        canvas.itemconfig(timer, fill='green')
+        timer_label.config(text='Long Break', bootstyle='danger')
+        canvas.itemconfig(timer, fill='red')
         count_d(long_break_sec)
     elif reps % 2 == 0:
-        timer_label.config(text='Time for a Break', bootstyle='warning')
+        timer_label.config(text='Time for a short Break', bootstyle='warning')
         canvas.itemconfig(timer, fill='orange')
         count_d(short_break_sec)
     else:
@@ -40,6 +40,10 @@ def count_d(c):
         window.after(1000, count_d, c - 1)
     else: 
         start_timer()
+        mark = ''
+        for _ in range(0, math.floor(reps/2)):
+            mark += "✔️"
+        check_marks['text'] = mark
 
 window = Tk()
 window.title('Pomodoro | Session')
@@ -61,5 +65,6 @@ reset_btn = Button(text='Reset', bootstyle='danger')
 
 start_btn.grid(column=0, row=1, padx=(250, 0))
 reset_btn.grid(column=2, row=1, padx=(0, 250))
-
+check_marks = Label(bootstyle='success', font=('Courier', 40))
+check_marks.grid(column=1, row=2)
 window.mainloop()
