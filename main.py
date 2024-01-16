@@ -4,7 +4,7 @@ from ttkbootstrap.constants import *
 import time as t
 import math
 
-WORK_MIN = 1
+WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
