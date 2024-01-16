@@ -8,6 +8,16 @@ WORK_MIN = 1
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
+t_mer = None
+
+def reset():
+    window.after_cancel(t_mer)
+    canvas.itemconfig(timer, text='00:00', fill='deepskyblue')
+    timer_label.config(text='Session Timer', bootstyle='info')
+    check_marks.config(text='')
+    global reps
+    reps = 0
+
 
 def start_timer():
     global reps
@@ -29,6 +39,7 @@ def start_timer():
         canvas.itemconfig(timer, fill='green')
         count_d(work_sec)
 
+
 def count_d(c):
     count_min = math.floor(c/60)
     count_sec = c % 60
@@ -37,13 +48,15 @@ def count_d(c):
     
     canvas.itemconfig(timer, text=f'{count_min}:{count_sec}')
     if c > 0:
-        window.after(1000, count_d, c - 1)
+        global t_mer
+        t_mer = window.after(1000, count_d, c - 1)
     else: 
         start_timer()
         mark = ''
         for _ in range(0, math.floor(reps/2)):
             mark += "✔️"
         check_marks['text'] = mark
+
 
 window = Tk()
 window.title('Pomodoro | Session')
@@ -61,10 +74,11 @@ canvas.tag_lower(canvas.find_all())
 canvas.grid(column=1, row=1)
 
 start_btn = Button(text='Start', bootstyle='success-outline', command=start_timer)
-reset_btn = Button(text='Reset', bootstyle='danger')
+reset_btn = Button(text='Reset', bootstyle='danger', command=reset)
 
 start_btn.grid(column=0, row=1, padx=(250, 0))
 reset_btn.grid(column=2, row=1, padx=(0, 250))
 check_marks = Label(bootstyle='success', font=('Courier', 40))
 check_marks.grid(column=1, row=2)
+
 window.mainloop()
