@@ -8,10 +8,13 @@ LONG_BREAK_MIN = 20
 
 window = Tk()
 window.title('Pomodoro | Session')
-
-canvas = Canvas(width=1500, height=500)
+timer_label = Label(text='Session Timer',bootstyle='info', font=('Courier', 25, 'bold'))
+timer_label.grid(column=1, row=0)
+canvas = Canvas(width=1105, height=500)
 img = PhotoImage(file='bgimg.png')
 canvas.create_image(-395,750, image=img)
-canvas.create_text(590,250, text='00:00', fill='blue', font=('Courier', 35, 'bold'))
-canvas.pack()
+canvas.create_text(555,250, text='00:00', fill='deepskyblue', font=('Courier', 35, 'bold'))
+canvas.tag_lower(canvas.find_all())
+canvas.grid(column=1, row=1)
+
 window.mainloop()
